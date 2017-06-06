@@ -8,7 +8,7 @@ const buildNotification = (msg, count) => {
 };
 
 const createBot = (bingo) => {
-  const bot = new TelegramBot(token, { polling: true });
+  const bot = new TelegramBot(process.env.TOKEN, { polling: true });
 
   bot.onText(/\/ступени/, function (msg) {
     var chat_id = msg.chat.id;
