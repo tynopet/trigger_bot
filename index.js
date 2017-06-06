@@ -8,7 +8,6 @@ const buildNotification = (msg, count) => {
 };
 
 const createBot = (bingo) => {
-  const token = process.env.TOKEN;
   const bot = new TelegramBot(token, { polling: true });
 
   bot.onText(/\/ступени/, function (msg) {
@@ -30,7 +29,7 @@ const createBot = (bingo) => {
   });
 }
 
-fs.readFile(`__dirname/words.txt`, (err, data) => {
+fs.readFile(`${__dirname}/words.txt`, 'utf8', (err, data) => {
   if (err) console.error(err);
   const bingo = data.split(', ');
   createBot(bingo);
