@@ -11,4 +11,3 @@ deploy:
   run:
     - "npm install"
     - "npm start"
-  skip_cleanup: true
