@@ -4,7 +4,8 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "start": "node index.js",
+    "deploy": "now --public -e BUILD_DATE=$(date +%Y%m%d%H%M) -e NODE_ENV=production"
   },
   "author": "",
   "license": "ISC",
