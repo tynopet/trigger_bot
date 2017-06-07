@@ -8,7 +8,12 @@ const buildNotification = (msg, count) => {
 };
 
 const createBot = (bingo) => {
-  const bot = new TelegramBot(process.env.TOKEN, { polling: true });
+  const port = process.env.PORT || 8443;
+  const host = process.env.HOST;
+  const bot = new TelegramBot(process.env.TOKEN, {
+    polling: true,
+    webHook: { port: port, host: host }
+  });
 
   bot.onText(/\/ступени/, function (msg) {
     var chat_id = msg.chat.id;
