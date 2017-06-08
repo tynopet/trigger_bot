@@ -26,7 +26,7 @@ const createBot = (bingo) => {
     if (message.text) {
       const msg = message.text.toLowerCase();
       bingoCount = bingo.reduce((acc, w) => msg.search(w) !== -1 ? acc + 1 : acc, 0)
-      if (bingoCount) {
+      if (bingoCount > 1) {
         bot.sendMessage(chatId, '`Звуки бинго`');
         bot.sendMessage(chatId, buildNotification(message, bingoCount));
       }
