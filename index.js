@@ -17,7 +17,7 @@ const createBot = (bingo) => {
 
   bot.onText(/\/ступени/, function (msg) {
     var chat_id = msg.chat.id;
-    var resp = '@Tynopet @nastenkamurr @stop_kran @shellwiz @sinstarker @ustits ступени го';
+    var resp = '@Tynopet @nastenkamurr @stop_kran @shellwiz @sinstarker @ustits @mazurikes ступени го';
     bot.sendMessage(chat_id, resp);
   });
 
