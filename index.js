@@ -1,5 +1,6 @@
 const TelegramBot = require('node-telegram-bot-api');
 const fs = require('fs');
+const https = require('https');
 
 const buildNotification = (msg, count) => {
   const name = msg.from.username ? '@' + msg.from.username : msg.from.first_name;
@@ -39,3 +40,9 @@ fs.readFile(`${__dirname}/words.txt`, 'utf8', (err, data) => {
   const bingo = data.split(', ');
   createBot(bingo);
 })
+
+// 30 min
+const interval = 1000 * 60 * 60 * 30;
+setInterval(() => {
+  https.get('https://stack-soft-trigger-bot.herokuapp.com/', console.log);
+}, interval);
