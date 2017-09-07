@@ -46,12 +46,14 @@ const buildNotification = (msg, count) => {
 };
 
 const createBot = (bingo) => {
+  const token = process.env.TOKEN;
   const port = process.env.PORT || 8443;
-  // const host = process.env.HOST;
-  const bot = new TelegramBot(process.env.TOKEN, {
-    polling: true,
-    webHook: { port: port/*, host: host*/ }
+  const bot = new TelegramBot(token, {
+    webHook: { port: port }
   });
+
+  const url = process.env.APP_URL;
+  bot.setWebHook(`${url}/bot${token}`);
 
   bot.onText(/\/stupeni/, function (msg) {
     var chat_id = msg.chat.id;
