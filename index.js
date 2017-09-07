@@ -53,6 +53,8 @@ const createBot = (bingo) => {
   });
 
   const url = process.env.APP_URL;
+  console.log(url);
+  console.log(port);
   bot.setWebHook(`${url}/bot${token}`);
 
   bot.onText(/\/stupeni/, function (msg) {
@@ -84,10 +86,4 @@ fs.readFile(`${__dirname}/words.txt`, 'utf8', (err, data) => {
   if (err) console.error(err);
   const bingo = data.split(', ');
   createBot(bingo);
-})
-
-// 30 min
-const interval = 1000 * 60 * 60 * 30;
-setInterval(() => {
-  https.get('https://stack-soft-trigger-bot.herokuapp.com/', console.log);
-}, interval);
+});
