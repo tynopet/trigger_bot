@@ -52,7 +52,7 @@ const createBot = (bingo) => {
     webHook: { port: port }
   });
 
-  const url = process.env.APP_URL;
+  const url = process.env.HOST;
   console.log(url);
   console.log(port);
   bot.setWebHook(`${url}/bot${token}`);
