@@ -1,13 +1,14 @@
 language: node_js
 node_js:
 - node
+cache: yarn
 install:
-- npm install
+- yarn
 deploy:
   provider: heroku
   api_key:
     secure: hk6z2lNAgy1zbddjujDB/fq9w9tcQ+AXN2P98KZG4jNtQnOCNLYqbMAQsMbnMM5hs6ZHlnVadbixiKf8RdfWQAjGlj+ssyINLYMIQBzCNmxwVm4lNTcMTKM/GzG/t+WxKd/AM8BlpZodBpw7NG+Ju+cGiUIOXu18Xfg2JbYoHGMoA+3Lv8QY4zLKg4aUrvsDALVLBhEL5naj4XMr3xMJ6QrTCq+D/Wvwm2ntrzRx9rlekT9CPej++XHZq6JKxFQqTCH/ADXPrh09weVogjLIsRPfbxcwAElPqiHSxac5sZR2yUiDqS2BxhlcYkRtudzCaJHCiL1h8tnIf3ZL0WrtJNaa7jq+r6OXosygbV16T+iDQuUSUctGW4u0OqS8YKOqljvzsM+XZV4seSbNzNArX9HAgrwVr40Scs/C91VfpiUujCWK49JllPh+q4IQhODbZmem2FNiHgv4AlX4t1kKg1Bbz19UqHyvjjqS6qnrW5DO194dDssxKV57ATg1u+jXBjXQAudfGDCGHyKXHl28jlq8wdDs5TsmM6TVF0K7scVGYbzwwTczASVPywPOJA5EG/pJstch9ReUosF1FZOVL/7/GP0b/XUwnh1FUmdA2gUrJC4cg8ZS5pjSNMpeI5pyeQRx5D1KQ1EWskSch6exibsj0/hyhCloBv7WUw3M1TA=
   app: stack-soft-trigger-bot
   run:
-    - "npm install"
-    - "npm start"
+    - "yarn"
+    - "yarn start"

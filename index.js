@@ -31,13 +31,13 @@ const getKakoy = (userId) => {
   return result;
 };
 
-const token = process.env.TOKEN || '197284125:AAHpdXpWxBKoTlAZSLZAZydgP97JBAJX2-g';
+const token = process.env.TOKEN;
 const port = process.env.PORT || 8443;
 const bot = new TelegramBot(token, {
   webHook: { port: port }
 });
 
-const url = process.env.HOST || 'https://ktjnsioxoy.localtunnel.me';
+const url = process.env.HOST;
 bot.setWebHook(`${url}/bot${token}`);
 
 bot.onText(/\/stupeni/, function (msg) {
