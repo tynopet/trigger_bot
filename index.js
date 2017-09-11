@@ -23,22 +23,21 @@ const getKakoy = (userId) => {
 
   let result = '';
   let tmp = [...kakoy];
-  for (let i = 0; i < parameters; i++) {
-    const idx = new Random(seed + i).next() % kakoy.length;
+  for (let i = 0; i < wordsCount; i++) {
+    const idx = new Random(seed + i).next() % (kakoy.length - 1);
     result += tmp[idx] + ' ';
     tmp = tmp.filter(el => el !== tmp[idx]);
   }
-  cache[userId] = result;
   return result;
 };
 
-const token = process.env.TOKEN;
+const token = process.env.TOKEN || '197284125:AAHpdXpWxBKoTlAZSLZAZydgP97JBAJX2-g';
 const port = process.env.PORT || 8443;
 const bot = new TelegramBot(token, {
   webHook: { port: port }
 });
 
-const url = process.env.HOST;
+const url = process.env.HOST || 'https://ktjnsioxoy.localtunnel.me';
 bot.setWebHook(`${url}/bot${token}`);
 
 bot.onText(/\/stupeni/, function (msg) {
