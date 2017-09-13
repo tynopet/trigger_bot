@@ -24,7 +24,7 @@ const getKakoy = (userId) => {
   let result = '';
   let tmp = [...kakoy];
   for (let i = 0; i < wordsCount; i++) {
-    const idx = new Random(seed + i).next() % (kakoy.length - 1);
+    const idx = new Random(seed + i).next() % (tmp.length - 1);
     result += tmp[idx] + ' ';
     tmp = tmp.filter(el => el !== tmp[idx]);
   }
