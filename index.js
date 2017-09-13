@@ -19,7 +19,7 @@ const getKakoy = (userId) => {
   const seed = userId + dateFns.getTime(currentDate);
   const random = new Random(seed);
   const randomValue = random.next();
-  const wordsCount = (randomValue % 3) + 1;
+  const wordsCount = (randomValue % 4) + 1;
 
   let result = '';
   let tmp = [...kakoy];
