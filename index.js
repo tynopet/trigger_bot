@@ -17,14 +17,17 @@ const kakoy = [
 const getKakoy = (userId) => {
   const currentDate = dateFns.startOfDay(new Date());
   const seed = userId + dateFns.getTime(currentDate) / 1e7;
+  console.log(seed);
   const random = new Random(seed);
   const randomValue = random.next();
   const wordsCount = (randomValue % 4) + 1;
 
   let result = '';
   let tmp = [...kakoy];
+  console.log(tmp.length);
   for (let i = 0; i < wordsCount; i++) {
     const idx = new Random(seed + i).next() % (tmp.length - 1);
+    console.log(idx);
     result += tmp[idx] + ' ';
     tmp = tmp.filter(el => el !== tmp[idx]);
   }
