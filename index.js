@@ -79,7 +79,7 @@ bot.onText(/\/stupeni/, function(msg) {
 });
 
 bot.onText(/^(\/kakoy \d+|\/kakoy@st_sf_trigger_bot \d+)$/, function(msg) {
-  const chat_id = msg.chat_id;
+  const chat_id = msg.chat.id;
   const count = parseInt(msg.text.match(/\d+/)[0], 10);
   if (count > 5) {
     bot.sendMessage(chat_id, `Я забыл, каким онимовцем ты был...`);
