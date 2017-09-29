@@ -83,21 +83,21 @@ bot.onText(/^(\/kakoy \d+|\/kakoy@st_sf_trigger_bot \d+)$/, function(msg) {
   const count = parseInt(msg.text.match(/\d+/)[0], 10);
   if (count > 5) {
     bot.sendMessage(chat_id, `Я забыл, каким онимовцем ты был...`);
-  }
-  if (count < 1) {
+  } else if (count < 1) {
     bot.sendMessage(chat_id, `Хватит тестировать меня на отрицательные числа!`);
+  } else {
+    let answer = "";
+    const startDate = dateFns.startOfDay(new Date());
+    for (let i = count; i > 0; i--) {
+      const date = dateFns.addDays(startDate, -i);
+      const kakoy = getKakoy(msg.from.id, date);
+      answer += `${dateFns.format(
+        date,
+        "DD.MM.YYYY"
+      )} ты был ${kakoy} Онимовцем!\n`;
+    }
+    bot.sendMessage(chat_id, answer);
   }
-  let answer = "";
-  const startDate = dateFns.startOfDay(new Date());
-  for (let i = count; i > 0; i--) {
-    const date = dateFns.addDays(startDate, -i);
-    const kakoy = getKakoy(msg.from.id, date);
-    answer += `${dateFns.format(
-      date,
-      "DD.MM.YYYY"
-    )} ты был ${kakoy} Онимовцем!\n`;
-  }
-  bot.sendMessage(chat_id, answer);
 });
 
 bot.onText(/^(\/kakoy|\/kakoy@st_sf_trigger_bot)$/, msg => {
