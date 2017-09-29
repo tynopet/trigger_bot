@@ -74,7 +74,7 @@ bot.setWebHook(`${url}/bot${token}`);
 bot.onText(/\/stupeni/, function(msg) {
   var chat_id = msg.chat.id;
   var resp =
-    "@tynopet @nastenkamurr @stop_kran @shellwiz @sinstarker @ustits @mazurikes ступени го";
+    "@tynopet @nastenkamurr @stop_kran @shellwiz @sinstarker @ustits ступени го";
   bot.sendMessage(chat_id, resp);
 });
 
@@ -94,7 +94,7 @@ bot.onText(/^(\/kakoy \d+|\/kakoy@st_sf_trigger_bot \d+)$/, function(msg) {
       answer += `${dateFns.format(
         date,
         "DD.MM.YYYY"
-      )} ты был ${kakoy} Онимовцем!\n`;
+      )} ты был ${kakoy} Онимовец!\n`;
     }
     bot.sendMessage(chat_id, answer);
   }
