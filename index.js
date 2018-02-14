@@ -1,4 +1,4 @@
-const TelegramBot = require("node-telegram-bot-api");
+const Telegraf = require("telegraf");
 const dateFns = require("date-fns");
 const Random = require("./prng");
 
@@ -51,6 +51,10 @@ const kakoy = [
   "отчетный"
 ];
 
+const token = process.env.TOKEN;
+const port = process.env.PORT || 8443;
+const host = process.env.HOST;
+
 const getKakoy = (userId, date) => {
   const seed = userId + Math.round(dateFns.getTime(date) / 1e7);
   const random = new Random(seed);
@@ -67,47 +71,43 @@ const getKakoy = (userId, date) => {
   return result;
 };
 
-const token = process.env.TOKEN;
-const port = process.env.PORT || 8443;
-const bot = new TelegramBot(token, {
-  webHook: { port: port }
-});
+const bot = new Telegraf(token);
 
-const url = process.env.HOST;
-bot.setWebHook(`${url}/bot${token}`);
-
-bot.onText(/\/stupeni/, function(msg) {
-  var chat_id = msg.chat.id;
-  var resp =
+bot.hears(/\/stupeni/, function(ctx) {
+  const resp =
     "@tynopet @nastenkamurr @stop_kran @shellwiz @sinstarker @ustits ступени го";
-  bot.sendMessage(chat_id, resp);
+
+  ctx.reply(resp);
 });
 
-bot.onText(/^(\/kakoy \d+|\/kakoy@st_sf_trigger_bot \d+)$/, function(msg) {
-  const chat_id = msg.chat.id;
-  const count = parseInt(msg.text.match(/\d+/)[0], 10);
-  if (count > 5) {
-    bot.sendMessage(chat_id, `Я забыл, каким онимовцем ты был...`);
-  } else if (count < 1) {
-    bot.sendMessage(chat_id, `Хватит тестировать меня на отрицательные числа!`);
-  } else {
-    let answer = "";
-    const startDate = dateFns.startOfDay(new Date());
-    for (let i = count; i > 0; i--) {
-      const date = dateFns.addDays(startDate, -i);
-      const kakoy = getKakoy(msg.from.id, date);
-      answer += `${dateFns.format(
-        date,
-        "DD.MM.YYYY"
-      )} ты был ${kakoy} Онимовец!\n`;
-    }
-    bot.sendMessage(chat_id, answer);
+bot.hears(/^(\/hist|\/hist@st_sf_trigger_bot)$/, (ctx) => {
+  const count = 5;
+  let answer = "";
+  const startDate = dateFns.startOfDay(new Date());
+
+  for (let i = count; i > 0; i--) {
+    const date = dateFns.addDays(startDate, -i);
+    const kakoy = getKakoy(ctx.update.message.from.id, date);
+    answer += `${dateFns.format(
+      date,
+      "DD.MM.YYYY"
+    )} ты был ${kakoy} Онимовец!\n`;
   }
+
+  ctx.reply(answer);
 });
 
-bot.onText(/^(\/kakoy|\/kakoy@st_sf_trigger_bot)$/, msg => {
-  const chat_id = msg.chat.id;
+bot.hears(/^(\/kakoy|\/kakoy@st_sf_trigger_bot)$/, (ctx) => {
   const date = dateFns.startOfDay(new Date());
-  const answer = getKakoy(msg.from.id, date);
-  bot.sendMessage(chat_id, `Сегодня ты ${answer} Онимовец!`);
+  const answer = getKakoy(ctx.update.message.from.id, date);
+
+  ctx.reply(
+    `Сегодня ты ${answer} Онимовец!`,
+    {
+      reply_to_message_id: ctx.message.message_id
+    }
+  );
 });
+
+bot.telegram.setWebhook(host);
+bot.startWebhook("/", null, port);

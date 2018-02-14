@@ -10,6 +10,6 @@
   "license": "ISC",
   "dependencies": {
     "date-fns": "^1.28.5",
-    "node-telegram-bot-api": "^0.25.0"
+    "telegraf": "^3.17.8"
   }
 }
