@@ -1,4 +1,4 @@
-const {bot} = require('./clients');
+const {telegram} = require('./../clients');
 const {createCanvas, loadImage} = require("canvas");
 
 const getRandomCoord = (range) => Math.round(Math.random() * range);
@@ -7,11 +7,14 @@ const processImg = async (link, width, height) => {
   const canvas = createCanvas(width, height);
   const ctx = canvas.getContext('2d');
   const img = await loadImage(link);
+  const emoji = Math.random() > 0.5
+    ? '❤️'
+    : '💋';
 
   ctx.drawImage(img, 0, 0, img.width, img.height);
   ctx.font = '80px HelveticaNeue';
   ctx.fillStyle = '#c62928';
-  ctx.fillText('💋', getRandomCoord(width - 80), getRandomCoord(height - 80));
+  ctx.fillText(emoji, getRandomCoord(width - 80), getRandomCoord(height - 80));
 
   return canvas.toBuffer();
 }
