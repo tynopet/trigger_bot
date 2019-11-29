@@ -1,7 +1,11 @@
 {
-    "build": {
-      "env": {
-        "TOKEN": "@trigger-bot-api-token"
-      }
-    }
+    "env": {
+    "TOKEN": "@trigger-bot-api-token"
+    },
+    "builds": [
+        {
+            "src": "*.js",
+            "use": "@now/node"
+        }
+    ]
   }

@@ -5,8 +5,7 @@
   "main": "index.js",
   "scripts": {
     "start": "node index.js",
-    "test": "node test.js",
-    "build": "npm i && rm -rf public && mkdir public && cp -r node_modules public && cp -r handlers public && cp -r utils public && cp clients.js public && cp index.js public"
+    "test": "node test.js"
   },
   "author": "",
   "license": "ISC",
