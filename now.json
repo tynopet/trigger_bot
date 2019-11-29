@@ -1,0 +1,7 @@
+{
+    "build": {
+      "env": {
+        "TOKEN": "@trigger-bot-api-token"
+      }
+    }
+  }
